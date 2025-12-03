@@ -1,0 +1,23 @@
+Policy ID: POL-022
+Title: Anti‑Harassment Policy
+Version: 3.0
+Effective Date: 2025-01-01
+
+Section 1: Purpose
+This policy outlines the rules and expectations regarding respectful workplace expectations and prohibited behaviors across all business units.
+
+Section 2: Scope
+This applies to employees, contractors, and authorized third parties interacting with company systems or information.
+
+Section 3: Key Requirements
+• Passwords must be at least 12 characters long.
+• All violations must be reported within 4 hours.
+• Records must be retained for a minimum of 10 years.
+• Gifts above $150 are prohibited.
+• Standard working hours are 9:00 AM to 6:00 PM, unless otherwise approved.
+
+Section 4: Enforcement
+Non‑compliance may result in disciplinary action, access revocation, or legal escalation.
+
+Section 5: Contacts
+Questions about this policy should be directed to compliance@company.com.

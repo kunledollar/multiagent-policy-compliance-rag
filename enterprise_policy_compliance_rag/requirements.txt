@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+openai>=1.6.0
+faiss-cpu
+numpy
+pydantic
+python-dotenv
+prometheus-fastapi-instrumentator
+pypdf
+python-docx
+streamlit
+requests

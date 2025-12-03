@@ -1,0 +1,23 @@
+Policy ID: POL-045
+Title: Data Privacy & Retention Policy
+Version: 2.0
+Effective Date: 2025-01-01
+
+Section 1: Purpose
+This policy outlines the rules and expectations regarding data protection, retention timelines, and confidentiality rules across all business units.
+
+Section 2: Scope
+This applies to employees, contractors, and authorized third parties interacting with company systems or information.
+
+Section 3: Key Requirements
+• Passwords must be at least 16 characters long.
+• All violations must be reported within 24 hours.
+• Records must be retained for a minimum of 3 years.
+• Gifts above $150 are prohibited.
+• Standard working hours are 9:00 AM to 5:00 PM, unless otherwise approved.
+
+Section 4: Enforcement
+Non‑compliance may result in disciplinary action, access revocation, or legal escalation.
+
+Section 5: Contacts
+Questions about this policy should be directed to compliance@company.com.
