@@ -39,3 +39,4 @@ Put your policy documents under `data/raw/` before ingestion.
   - `OPENAI_API_KEY`
 
 On push to `main` the workflow will deploy to EC2 and run `docker compose up -d --build`.
+CI/CD pipeline test at Thu Dec  4 13:12:47 UTC 2025
