@@ -40,3 +40,4 @@ Put your policy documents under `data/raw/` before ingestion.
 
 On push to `main` the workflow will deploy to EC2 and run `docker compose up -d --build`.
 CI/CD pipeline test at Thu Dec  4 13:12:47 UTC 2025
+Test deploy Thu Dec  4 13:46:50 UTC 2025
