@@ -1,0 +1,12 @@
+[
+  {
+    "question": "What is the storage retention requirement for policy POL-045?",
+    "answer": "Storage for POL-045 must be retained for 7 years according to compliance rules.",
+    "contexts": [
+      "POL-045 states that retention must be 7 years for all covered documents.",
+      "Additional notes specify that digital files must also follow the same timeline."
+    ],
+    "ground_truth": "POL-045 requires a 7-year retention period for covered documents."
+  }
+]
+
