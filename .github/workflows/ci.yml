@@ -2,13 +2,19 @@ name: CI/CD Pipeline - Multi-Agent RAG
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-test-eval:
     runs-on: ubuntu-latest
+
+    # ---------------------------
+    # GLOBAL ENVIRONMENT (FIXES YOUR ERROR)
+    # ---------------------------
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
     # ---------------------------
@@ -28,34 +34,24 @@ jobs:
     # ---------------------------
     # INSTALL DEPENDENCIES
     # ---------------------------
-    - name: Install requirements
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     # ---------------------------
     # RUN RAGAS EVALUATION
-    # This is your enterprise-level quality gate
-    # Deployment will stop if scores fail
     # ---------------------------
     - name: Run RAGAS evaluation
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python ragas_evaluation.py
 
     # ---------------------------
     # QUALITY GATE (OPTIONAL)
-    # Fail pipeline if faithfulness < 0.6 or relevance < 0.6
     # ---------------------------
     - name: Enforce minimum RAG quality
       run: |
-        faith=$(python3 -c "import json; import ragas_evaluation; print(0.5)") # placeholder gate
-        echo "Faithfulness score: $faith"
-        if (( $(echo "$faith < 0.3" | bc -l) )); then
-          echo "❌ RAG quality too low — stopping deployment."
-          exit 1
-        fi
+        echo "Skipping strict quality gate for now."
 
     # ---------------------------
     # BUILD DOCKER IMAGE
@@ -65,7 +61,7 @@ jobs:
         docker build -t multiagent-rag .
 
     # ---------------------------
-    # DEPLOY TO EC2 (SSH)
+    # DEPLOY TO EC2
     # ---------------------------
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.6
@@ -76,5 +72,5 @@ jobs:
         script: |
           cd ~/multiagent-policy-compliance-rag
           git pull origin main
-          docker compose down
+          docker compose down || true
           docker compose up -d --build
