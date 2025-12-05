@@ -41,3 +41,4 @@ logs/
 # Build
 dist/
 build/
+*~
