@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from .agents import (
     retrieval_agent,
@@ -11,10 +11,9 @@ from .agents import (
     pipeline_logger,
 )
 
-# ⚡ RAGAS removed from live query for speed
-# If needed, run RAGAS separately on demand (Tab 2 only)
-from .evaluation import run_ragas_evaluation
-
+from .evaluation import (
+    run_ragas_evaluation
+)
 
 # ----------------------------------------------------
 # MAIN PIPELINE ENTRYPOINT
@@ -37,21 +36,21 @@ def answer_query(query: str) -> Dict:
     # 5 — Fact checking
     fact_check_verdict, sources = fact_checker_agent(query, reasoning, reranked)
 
-    # 6 — Final synthesized answer
+    # 6 — Final synthesised answer
     answer = answer_writer_agent(query, reranked, reasoning, fact_check_verdict)
 
-    # ------------------------------------------------
-    # 7 — RAGAS Evaluation (DISABLED FOR LATENCY)
-    # ------------------------------------------------
-    # RAGAS removed from the live query path to make responses faster.
-    # The dashboard’s Evaluation Tab can still call RAGAS when needed.
-    ragas_scores = {}
+    # 7 — Build RAGAS dataset
+    #build_ragas_dataset(
+     #   question=query,
+      #  answer=answer,
+       # contexts=reranked,
+    #)
 
-    # If you ever want to turn it on:
-    # try:
-    #     ragas_scores = run_ragas_evaluation()
-    # except Exception as e:
-    #     ragas_scores = {"error": str(e)}
+    # 8 — Run RAGAS evaluation
+    try:
+        ragas_scores = run_ragas_evaluation()
+    except Exception as e:
+        ragas_scores = {"error": str(e)}
 
     pipeline_logger.info("RAG pipeline complete")
 

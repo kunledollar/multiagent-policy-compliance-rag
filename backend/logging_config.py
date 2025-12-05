@@ -70,3 +70,16 @@ pipeline_logger.addHandler(get_rotating_handler("rag_pipeline.log"))
 # Helper: create request ID
 def new_request_id():
     return str(uuid.uuid4())
+
+# -------------------------------------------------------------------
+# Compatibility functions for existing imports
+# -------------------------------------------------------------------
+
+def setup_logging():
+    """Kept for backward compatibility. Logging already initialized globally."""
+    pass
+
+
+def get_logger(name: str):
+    """Return a logger by name."""
+    return logging.getLogger(name)

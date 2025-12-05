@@ -5,12 +5,14 @@ from .config import CHAT_MODEL, RAG_SYSTEM_PROMPT
 from .embeddings import get_embedding
 from .vector_store import vector_store
 
-# 🔥 Logging imports
-from logging_config import (
+# ----------------------------------------------------
+# FIXED LOGGING IMPORTS
+# ----------------------------------------------------
+from .logging_config import (
     query_agent_logger,
     retriever_agent_logger,
     synth_agent_logger,
-    pipeline_logger
+    pipeline_logger,
 )
 
 client = openai.OpenAI()
@@ -58,7 +60,7 @@ def summarizer_agent(chunks: List[Dict]) -> str:
 
     msg = (
         "Summarise the following policy excerpts into key bullet points focused on "
-        "rules, thresholds, timelines, and obligations. Preserve any numbers or limits.\n\n" 
+        "rules, thresholds, timelines, and obligations. Preserve any numbers or limits.\n\n"
         + joined
     )
 

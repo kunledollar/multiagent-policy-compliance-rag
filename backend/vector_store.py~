@@ -1,0 +1,75 @@
+import os
+import json
+import numpy as np
+from pathlib import Path
+
+VECTOR_INDEX_PATH = "/app/artifacts/vector_index.npy"
+METADATA_PATH = "/app/artifacts/metadata.json"
+
+class VectorStore:
+    def __init__(self):
+        self.vectors = None
+        self.metadatas = []
+
+    def load(self):
+        """Load vector index + metadata if available."""
+        if os.path.exists(VECTOR_INDEX_PATH):
+            self.vectors = np.load(VECTOR_INDEX_PATH)
+        else:
+            self.vectors = None
+
+        if os.path.exists(METADATA_PATH):
+            with open(METADATA_PATH, "r") as f:
+                self.metadatas = json.load(f)
+        else:
+            self.metadatas = []
+
+    def save(self):
+        """Save vectors + metadata."""
+        if self.vectors is not None:
+            np.save(VECTOR_INDEX_PATH, self.vectors)
+
+        with open(METADATA_PATH, "w") as f:
+            json.dump(self.metadatas, f, indent=2)
+
+    def add(self, new_vectors, new_metadata):
+        """Append new vectors + metadata entries."""
+        new_vectors = np.array(new_vectors)
+
+        if self.vectors is None:
+            self.vectors = new_vectors
+        else:
+            self.vectors = np.vstack([self.vectors, new_vectors])
+
+        self.metadatas.extend(new_metadata)
+
+    def search(self, query_vector, k=5):
+        """Return top-k closest vectors."""
+        if self.vectors is None or len(self.metadatas) == 0:
+            return []
+
+        q = np.array(query_vector)
+        norms = np.linalg.norm(self.vectors - q, axis=1)
+
+        idx = norms.argsort()[:k]
+        results = []
+        for i in idx:
+            item = self.metadatas[i].copy()
+            item["score"] = float(norms[i])
+            results.append(item)
+
+        return results
+
+    def stats(self):
+        """Return basic store statistics."""
+        if self.vectors is None:
+            return {"num_vectors": 0}
+
+        return {
+            "num_vectors": self.vectors.shape[0],
+            "vector_dim": int(self.vectors.shape[1]),
+        }
+
+
+# GLOBAL INSTANCE
+vector_store = VectorStore()

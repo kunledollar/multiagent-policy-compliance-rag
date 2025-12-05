@@ -12,7 +12,7 @@ def strip_control_chars(text: str) -> str:
     return CONTROL_CHARS_RE.sub(" ", text)
 
 def strip_unwanted_chars(text: str) -> str:
-    return re.sub(r"[^a-zA-Z0-9.,;:?!'"\-()\[\]/\\\s]", " ", text)
+    return re.sub(r"[^a-zA-Z0-9.,;:?!'\"\-()\[\]/\\\s]", " ", text)
 
 def collapse_spaces(text: str) -> str:
     return MULTI_SPACE_RE.sub(" ", text).strip()

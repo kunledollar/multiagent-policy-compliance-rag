@@ -49,11 +49,11 @@ services:
     restart: always
     networks:
       - ragnet
-    ports:
-      - "9090:9090"
     volumes:
       - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./monitoring/prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
+    ports:
+      - "9090:9090"
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-lifecycle'
@@ -80,6 +80,10 @@ services:
     depends_on:
       - prometheus
 
+networks:
+  ragnet:
+    driver: bridge
+
   otel-collector:
     image: otel/opentelemetry-collector:latest
     container_name: rag_otel
@@ -90,9 +94,4 @@ services:
       - "4318:4318"
     volumes:
       - ./monitoring/otel/collector.yaml:/etc/otel/collector.yaml
-    command:
-      - "--config=/etc/otel/collector.yaml"
-
-networks:
-  ragnet:
-    driver: bridge
+    command: ["--config=/etc/otel/collector.yaml"]

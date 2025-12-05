@@ -1,0 +1,124 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "rag-overview",
+    "title": "RAG System Overview",
+    "tags": ["RAG", "Compliance", "Monitoring"],
+    "timezone": "browser",
+    "schemaVersion": 37,
+    "version": 1,
+    "refresh": "10s",
+    "panels": [
+      {
+        "type": "stat",
+        "title": "API Health",
+        "targets": [
+          {
+            "expr": "up{job=\"api\"}",
+            "interval": ""
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+        "options": {
+          "reduceOptions": { "calcs": ["last"] },
+          "colorMode": "value",
+          "graphMode": "none",
+          "textMode": "value"
+        }
+      },
+      {
+        "type": "gauge",
+        "title": "RAG Pipeline Duration (ms)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.90, sum(rate(rag_pipeline_duration_bucket[5m])) by (le)) * 1000"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "type": "timeseries",
+        "title": "API Request Rate (req/min)",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"api\"}[1m]))"
+          }
+        ],
+        "gridPos": { "x": 12, "y": 0, "w": 12, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Vector Store — Total Chunks",
+        "targets": [
+          {
+            "expr": "vector_store_chunks_total"
+          }
+        ],
+        "options": {
+          "reduceOptions": { "calcs": ["last"] }
+        },
+        "gridPos": { "x": 0, "y": 4, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Latest RAGAS Composite Score",
+        "targets": [
+          {
+            "expr": "ragas_composite_score"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 4, "w": 6, "h": 4 }
+      },
+      {
+        "type": "timeseries",
+        "title": "API Error Rate",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"api\", status!~\"2..\"}[5m]))"
+          }
+        ],
+        "gridPos": { "x": 12, "y": 4, "w": 12, "h": 4 }
+      },
+      {
+        "type": "timeseries",
+        "title": "API Latency (P50, P90, P99)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"api\"}[5m])) by (le))",
+            "legendFormat": "p50"
+          },
+          {
+            "expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket{job=\"api\"}[5m])) by (le))",
+            "legendFormat": "p90"
+          },
+          {
+            "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job=\"api\"}[5m])) by (le))",
+            "legendFormat": "p99"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 8, "w": 24, "h": 6 }
+      },
+      {
+        "type": "timeseries",
+        "title": "API CPU Usage",
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{name=~\"rag_api\"}[2m])"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 14, "w": 12, "h": 6 }
+      },
+      {
+        "type": "timeseries",
+        "title": "API Memory Usage",
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{name=~\"rag_api\"}"
+          }
+        ],
+        "gridPos": { "x": 12, "y": 14, "w": 12, "h": 6 }
+      }
+    ]
+  },
+  "overwrite": true
+}

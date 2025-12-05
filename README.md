@@ -33,7 +33,7 @@ Put your policy documents under `data/raw/` before ingestion.
 - Push this repo to GitHub.
 - Add repo secrets:
 
-  - `EC2_HOST` (e.g. `ubuntu@3.136.159.224`)
+  - `EC2_HOST` (e.g. `ubuntu@ubuntu@3.20.47.220`)
   - `EC2_SSH_KEY` (contents of rag_key.pem)
   - `EC2_PROJECT_DIR` (e.g. `/home/ubuntu/enterprise_policy_compliance_rag`)
   - `OPENAI_API_KEY`

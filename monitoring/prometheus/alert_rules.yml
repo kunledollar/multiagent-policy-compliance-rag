@@ -1,0 +1,28 @@
+groups:
+  - name: rag_alerts
+    rules:
+      - alert: RAG_API_Down
+        expr: up{job="api"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "RAG API is DOWN"
+          description: "Prometheus has not detected the RAG API for 30 seconds."
+
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High RAG API latency detected"
+          description: "95th percentile latency > 2 seconds for the last 2 minutes."
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 5
+        labels:
+          severity: warning
+        annotations:
+          summary: "High API error rate"
+          description: "More than 5 server errors (5xx) in the last 5 minutes."

@@ -1,0 +1,20 @@
+{
+  "question": [
+    "metrics check"
+  ],
+  "answer": [
+    "The policy (POL-033) specifies standard working hours as 8:00 AM to 5:00 PM unless otherwise approved and outlines enforcement measures for non-compliance, including disciplinary action, access revocation, or legal escalation. However, it does not provide details regarding metrics checks. For specific questions or scenarios related to metrics or compliance, please contact compliance@company.com as indicated in Section 5 of POL-033."
+  ],
+  "contexts": [
+    [
+      "ited. Standard working hours are 8:00 AM to 5:00 PM, unless otherwise approved. Section 4: Enforcement Non compliance may result in disciplinary action, access revocation, or legal escalation. Section 5: Contacts Questions about this policy should be directed to compliance company.com.",
+      "ited. Standard working hours are 8:00 AM to 5:00 PM, unless otherwise approved. Section 4: Enforcement Non compliance may result in disciplinary action, access revocation, or legal escalation. Section 5: Contacts Questions about this policy should be directed to compliance company.com.",
+      "ited. Standard working hours are 8:00 AM to 5:00 PM, unless otherwise approved. Section 4: Enforcement Non compliance may result in disciplinary action, access revocation, or legal escalation. Section 5: Contacts Questions about this policy should be directed to compliance company.com.",
+      "ited. Standard working hours are 8:00 AM to 5:00 PM, unless otherwise approved. Section 4: Enforcement Non compliance may result in disciplinary action, access revocation, or legal escalation. Section 5: Contacts Questions about this policy should be directed to compliance company.com.",
+      "ited. Standard working hours are 8:00 AM to 5:00 PM, unless otherwise approved. Section 4: Enforcement Non compliance may result in disciplinary action, access revocation, or legal escalation. Section 5: Contacts Questions about this policy should be directed to compliance company.com."
+    ]
+  ],
+  "ground_truth": [
+    ""
+  ]
+}
